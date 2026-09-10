@@ -58,7 +58,7 @@ Security · Managed Identity · RBAC · Key Vault · Private Endpoints
 
 Background
 
-Two decades across regulated financial services and enterprise clients — private equity & investment management (LGT Capital Partners), alternative investments (BNY Mellon), energy-trading compliance (Uniper), and connected-vehicle telemetry at Microsoft. SQL and relational data modelling since 2006; twelve years on Azure across event-driven, serverless, and microservices systems.
+Two decades across regulated financial services and enterprise clients — private equity & investment management, alternative investments (BNY Mellon), energy-trading compliance (Uniper), and connected-vehicle telemetry at Microsoft. SQL and relational data modelling since 2006; twelve years on Azure across event-driven, serverless, and microservices systems.
 
 Certifications: DP-700 (Fabric Data Engineer Associate) · MCSE: Cloud Platform & Infrastructure · MCSD: Azure Solutions Architect
 
