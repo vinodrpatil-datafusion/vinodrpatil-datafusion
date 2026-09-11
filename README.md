@@ -1,68 +1,60 @@
-Vinod Patil
+# Vinod Patil
 
-Lead Data & AI Engineer
+**Lead Data & AI Engineer** · Azure · .NET · Microsoft Fabric
 
-19+ years delivering enterprise production systems on Azure and .NET — now specialising in Microsoft Fabric and Azure AI, bringing two decades of regulated-delivery discipline to data and AI engineering where compliance is non-negotiable.
+20 years building enterprise production systems on the Microsoft stack — 15 of them on Azure — for regulated environments where compliance is not optional. Now working at the boundary where AI features have to reach production **safely**: deterministic guardrails, auditability, and honest scoping.
 
-Regulated financial services is the throughline: MAR trade surveillance, SWIFT payment integration, and PE/VC analytics for clients including LGT Capital Partners, BNY Mellon, and Uniper.
+📍 Based in Germany · **permanent residence (Niederlassungserlaubnis)** — unrestricted employment and self-employment, no sponsorship required
+🌐 English-speaking teams · remote-first, open to hybrid
 
+---
 
-🔧 Building in public
+## Building in public
 
-I build reference architectures with the design reasoning and evaluation kept in the open — not just working code, but the decisions behind it and the evidence that it works.
+I publish reference architectures with the design reasoning and the evaluation kept in the open — not just working code, but the decisions behind it and the evidence that it works. Both repos label what is built versus what production would additionally require.
 
-fabric-pe-vc-analytics
+### [`ai-business-analyst-agent`](https://github.com/vinodrpatil-datafusion/ai-business-analyst-agent)
 
-A Microsoft Fabric medallion reference architecture for private-equity / venture-capital analytics, validated end-to-end on a live Fabric tenant.
+*.NET 8 · Azure Functions · Azure OpenAI · React* — a serverless pipeline turning business data into executive insight, on a **deterministic-before-probabilistic** design: statistics and anomalies are computed in C#, and the model narrates a bounded, pre-computed summary. **Raw rows never reach the LLM.**
 
+- **Secretless end to end** — user-assigned managed identity for OpenAI, Blob and SQL; user-delegation SAS for uploads, so no account key exists anywhere in the path
+- **Prompt-injection mitigation** — user-derived strings sanitised and fenced as untrusted data, with a fence-breakout regression test
+- **Append-only audit trail** — every attempt persists its signals, the exact summary the model saw, the raw response, the prompt version and token counts
+- **Production-shaped reliability** — atomic job-state transitions, idempotent triggers, lease-based recovery of crash-orphaned jobs, retry caps, adaptive token budgeting
+- **Tests gate deployment** — xUnit over the deterministic core; GitHub Actions runs them on every push and deploys only if they pass, via OIDC federated identity with no deployment secrets
 
-Conformed bitemporal Delta build → Gold star schema (Lakehouse Delta, Type-2 dimensions, point-in-time joins) → DirectLake semantic model → Power BI report
-AI layer: RAG over an Azure AI Foundry vector store + function-calling structured retrieval over the semantic model, composed by a route-then-invoke fusion agent — with an oracle-based evaluation harness (structured leg 6/6 grounded; document leg 5/6, with a documented citation-accuracy finding)
-CI/CD promotion across dev / test / prod via Fabric deployment pipelines and Git integration
-17 documented design decisions (DD-01 → DD-17) in docs/design_decisions.md
+### [`fabric-pe-vc-analytics`](https://github.com/vinodrpatil-datafusion/fabric-pe-vc-analytics)
 
+*Microsoft Fabric · Delta Lake · DirectLake · Azure AI Foundry* — a medallion reference architecture for private-equity / venture-capital analytics, built and validated end to end on a live Fabric tenant.
 
+- **Bitemporal conformed layer** — `effective_date` versus `ingestion_date`, Type-2 SCD for restatements, so "as-of" queries are first-class
+- **Reconciliation that surfaces conflicts** rather than silently picking winners — scored 1.000/1.000 against a synthetic conflict oracle
+- **Gold star schema → DirectLake semantic model → Power BI**, with a published measure contract covering definitions, valid grain and caveats
+- **AI layer** — route-then-invoke fusion agent over an Azure AI Foundry vector store and function-calling retrieval against the semantic model, with an **oracle-based** evaluation harness rather than LLM-as-judge (structured leg 6/6 grounded; document leg 4/6, with citation-accuracy and annotation coverage reported separately)
+- **17 numbered design decisions** (DD-01 → DD-17), including decisions that were later revised, with the revision reasoning kept
 
-Scope: a portfolio-scale reference build on a trial tenant against a synthetic LP corpus — not delivered to a named client. What's built vs. what production additionally requires is labelled throughout.
+> Portfolio-scale build on a trial tenant against a synthetic corpus — not client work, and labelled as such throughout.
 
+---
 
+## Core stack
 
-ai-business-analyst-agent
+| | |
+|---|---|
+| **Platform & .NET** | .NET / C# · Azure Functions · Service Bus · AKS · Service Fabric · event-driven microservices |
+| **Azure Data & Fabric** | Microsoft Fabric (DP-700) · Data Factory · OneLake / ADLS · Delta Lake · DirectLake · Power BI |
+| **AI Engineering** | Azure OpenAI · Azure AI Foundry (RAG, vector stores) · function-calling and tool routing · RAG evaluation — groundedness, citation-accuracy |
+| **Security & Governance** | Managed Identity · least-privilege RBAC · Key Vault · Private Endpoints · prompt-injection mitigation · model-input audit trails |
+| **IaC & DevOps** | Terraform · ARM · Azure DevOps · GitHub Actions · PowerShell |
 
-A .NET 8 / Azure Functions insight application on a deterministic-before-probabilistic design — statistics and anomalies computed in code, Azure OpenAI narrating a bounded, pre-computed summary.
+## Background
 
+Two decades across regulated financial services and enterprise clients — private equity and investment management, alternative investments, global custody, energy-trading compliance and MAR trade surveillance, SWIFT payment integration, and connected-vehicle telemetry. SQL and relational modelling since 2006; 15 years on Azure across event-driven, serverless and microservices systems.
 
-Secretless authentication end-to-end (user-assigned Managed Identity, least-privilege RBAC)
-Append-only audit trail — persists the exact input the model saw, the prompt version, the raw response, and token counts per run
-Two named pipeline stages, deterministic core — no orchestration loop, no multi-agent framework, by design
+**Certifications:** DP-700 (Fabric Data Engineer Associate) · MCSE: Cloud Platform & Infrastructure · MCSD: Azure Solutions Architect
 
+## Open to work
 
+Contract or senior permanent, remote-first — **Azure and .NET platform engineering, data platform, and applied AI**. Regulated financial services is where I have the deepest domain context, but the stack matters more than the sector.
 
-Scope: a portfolio project, not a production deployment.
-
-
-
-
-Core stack
-
-Azure Data & Fabric · Microsoft Fabric (DP-700) · Data Factory · OneLake / ADLS · Delta Lake · DirectLake · Power BI
-
-AI Engineering · Azure OpenAI · Azure AI Foundry (RAG, vector store) · function-calling & tool routing · RAG evaluation (groundedness, citation-accuracy)
-
-Platform & .NET · .NET / C# · Azure Functions · Service Bus · AKS · Service Fabric · event-driven microservices
-
-IaC & DevOps · Terraform · ARM Templates · Azure DevOps · CI/CD · PowerShell
-
-Security · Managed Identity · RBAC · Key Vault · Private Endpoints
-
-
-Background
-
-Two decades across regulated financial services and enterprise clients — private equity & investment management, alternative investments (BNY Mellon), energy-trading compliance (Uniper), and connected-vehicle telemetry at Microsoft. SQL and relational data modelling since 2006; twelve years on Azure across event-driven, serverless, and microservices systems.
-
-Certifications: DP-700 (Fabric Data Engineer Associate) · MCSE: Cloud Platform & Infrastructure · MCSD: Azure Solutions Architect
-
-
-Open to work
-
-Remote Microsoft Fabric + Azure AI engagements — contract or senior permanent. Regulated financial services a particular focus.
+[LinkedIn](https://www.linkedin.com/in/vinodrpatil/) · vinodrpatil@outlook.com
